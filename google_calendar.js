@@ -1,7 +1,7 @@
 const { google } = require('googleapis');
 require('dotenv').config();
 
-// Provide the required configuration 
+// Provide the required configuration
 const CREDENTIALS = JSON.parse(process.env.CREDENTIALS);
 const calendarId = process.env.CALENDAR_ID;
 
@@ -15,6 +15,8 @@ const auth = new google.auth.JWT(
     CREDENTIALS.private_key,
     SCOPES
 );
+
+// console.log({ auth })       
 
 // Your TIMEOFFSET Offset
 const TIMEOFFSET = '+05:30';
@@ -55,8 +57,8 @@ const dateTimeForCalander = () => {
         'end': endDate
     }
 };
-//console.log(dateTimeForCalander());
-// Insert new event 
+
+// Insert new event to Google Calendar
 const insertEvent = async(event) => {
 
     try {
@@ -81,8 +83,8 @@ let dateTime = dateTimeForCalander();
 
 // Event for Google Calendar
 let event = {
-    'summary': `This is the summary12.`,
-    'description': `This is the description12.`,
+    'summary': `This is the summary.`,
+    'description': `This is the description.`,
     'start': {
         'dateTime': dateTime['start'],
         'timeZone': 'Asia/Kolkata'
@@ -100,6 +102,9 @@ insertEvent(event)
     .catch((err) => {
         console.log(err);
     });
+
+
+
 
 
 // Get all the events between two dates
@@ -122,8 +127,8 @@ const getEvents = async(dateTimeStart, dateTimeEnd) => {
     }
 };
 
-// let start = '2021-09-13T00:00:00.000Z';
-// let end = '2021-09-15T00:00:00.000Z';
+// let start = '2020-10-03T00:00:00.000Z';
+// let end = '2020-10-04T00:00:00.000Z';
 
 // getEvents(start, end)
 //     .then((res) => {
@@ -154,12 +159,12 @@ const deleteEvent = async(eventId) => {
     }
 };
 
-// let eventId = '8749v068pj04miccu2iliv0jk8';
+let eventId = 'hkkdmeseuhhpagc862rfg6nvq4';
 
-// deleteEvent(eventId)
-//     .then((res) => {
-//         console.log(res);
-//     })
-//     .catch((err) => {
-//         console.log(err);
-//     });
+deleteEvent(eventId)
+    .then((res) => {
+        console.log(res);
+    })
+    .catch((err) => {
+        console.log(err);
+    });
